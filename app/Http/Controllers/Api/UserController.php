@@ -11,28 +11,6 @@ use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
-    public function setPassword(Request $request)
-    {
-        $request->validate([
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'password' => ['required', 'confirmed', Password::defaults()],
-        ]);
-
-        $user = User::where('email', $request->email)->first();
-
-        if ($user !== null) {
-            $user->password = Hash::make($request->password);
-        }
-        
-        if ($user->save()) {
-            $response['success'] = 'success';
-            $response['user_id'] = $user->id;
-        } else {
-            $response = 'error';
-        }    
-        
-        return $response;
-    }
 
     public function login(Request $request)
     {
@@ -42,11 +20,44 @@ class UserController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            $response = 'success';
+            $response = [
+                'success' => 'success',
+                'user_id' => Auth::id(),
+            ];
         } else {
-            $response = 'error';
+            $response = [
+                'success' => 'error',
+            ];
         }
 
-        return $response;
+        return response()->json($response);
+    }
+
+    public function setPassword(Request $request)
+    {
+        $request->validate([
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'confirmed', Password::defaults()],
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+        $response = [];
+
+        if ($user !== null) {
+            $user->password = Hash::make($request->password);
+        }
+
+        if ($user->save()) {
+            $response = [
+                'success' => 'success',
+                'user_id' => $user->id,
+            ];
+        } else {
+            $response = [
+                'success' => 'error',
+            ];
+        }
+
+        return response()->json($response);
     }
 }
