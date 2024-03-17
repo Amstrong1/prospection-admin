@@ -16,7 +16,7 @@ class ProspectController extends Controller
      */
     public function index($id)
     {
-        $prospects = Prospect::where('user_id', $id)->get();
+        $prospects = Prospect::where('user_id', $id)->with('solutions')->get();
         return DataResource::collection($prospects);
     }
 
@@ -51,11 +51,11 @@ class ProspectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
-    {
-        $prospect = Prospect::find($id);
-        return new DataResource($prospect);
-    }
+    // public function show($id)
+    // {
+    //     $prospect = Prospect::find($id);
+    //     return new DataResource($prospect);
+    // }
 
     /**
      * Update the specified resource in storage.

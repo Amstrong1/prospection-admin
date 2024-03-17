@@ -13,8 +13,7 @@ Route::get('/user', function (Request $request) {
 Route::post('/set-password', [UserController::class, 'setPassword']);
 Route::post('/login', [UserController::class, 'login']);
 
-Route::get('/prospect', [ProspectController::class, 'index']);
-Route::get('/prospect/{id}', [ProspectController::class, 'show']);
+Route::get('/prospect/{id}', [ProspectController::class, 'index']);
 Route::post('/prospect', [ProspectController::class, 'store']);
 Route::post('/prospect/{id}', [ProspectController::class, 'update']);
 Route::delete('/prospect/{id}', [ProspectController::class, 'destroy']);
