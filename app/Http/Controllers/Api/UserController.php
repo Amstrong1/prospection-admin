@@ -25,7 +25,8 @@ class UserController extends Controller
         }
         
         if ($user->save()) {
-            $response = 'success';
+            $response['success'] = 'success';
+            $response['user_id'] = $user->id;
         } else {
             $response = 'error';
         }    

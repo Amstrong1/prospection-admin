@@ -27,18 +27,33 @@ class UserController extends Controller
         ]);
     }
 
+    public function generateRandomCode() {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $code = '';
+    
+        for ($i = 0; $i < 8; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $code .= $characters[$index];
+        }
+    
+        return $code;
+    }
+
     public function store(StoreUserRequest $request)
     {
         $user = new User();
+
+        $code = $this->generateRandomCode();
 
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->address = $request->address;
         $user->tel = $request->tel;
         $user->email = $request->email;
+        $user->password = $code;
 
         if ($user->save()) {
-            $user->notify(new NewUserNotification());
+            $user->notify(new NewUserNotification($code));
             Alert::toast("Opération éffectué avec succès", 'success');
             return redirect('users');
         } else {

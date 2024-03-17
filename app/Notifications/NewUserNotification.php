@@ -11,12 +11,14 @@ class NewUserNotification extends Notification
 {
     use Queueable;
 
+    public $password;
+
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct($password)
     {
-        //
+        $this->password = $password;
     }
 
     /**
@@ -35,8 +37,10 @@ class NewUserNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line('M/Mme ' . $notifiable->name)
+            ->line('M/Mme ' . $notifiable->lastname . ' ' . $notifiable->firstname)
             ->line('Vous avez été enregisté en tant qu\'agent commercial.')
+            ->line('Votre adresse email est : ' . $notifiable->email)
+            ->line('Votre code de connexion est : ' . $this->password)
             ->line('Accéder à l\'application mobile pour terminer la configuration de votre compte.');
     }
 
