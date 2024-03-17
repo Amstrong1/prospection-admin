@@ -21,12 +21,12 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials)) {
             $response = [
-                'success' => 'success',
+                'success' => true,
                 'user_id' => Auth::id(),
             ];
         } else {
             $response = [
-                'success' => 'error',
+                'success' => false,
             ];
         }
 
@@ -49,12 +49,12 @@ class UserController extends Controller
 
         if ($user->save()) {
             $response = [
-                'success' => 'success',
+                'success' => true,
                 'user_id' => $user->id,
             ];
         } else {
             $response = [
-                'success' => 'error',
+                'success' => false,
             ];
         }
 
