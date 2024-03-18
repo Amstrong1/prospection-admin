@@ -39,10 +39,10 @@ class ProspectController extends Controller
             $prospectSolution->prospect_id = $prospect->id;
             $prospectSolution->solution_id = $request->solution;
             $prospectSolution->save();
-            
-            $response = 'success';
+
+            $response = ['success' => true];
         } else {
-            $response = 'error';
+            $response = ['success' => false];
         }
 
         return $response;
