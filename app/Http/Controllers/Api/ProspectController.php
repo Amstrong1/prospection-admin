@@ -35,7 +35,8 @@ class ProspectController extends Controller
         $prospect->email = $request->email;
 
         if ($prospect->save()) {
-            foreach ($request->solutions as $value) {
+            $solutions = json_decode($request->solutions);
+            foreach ($solutions as $value) {
                 $prospectSolution = new ProspectSolution();
                 $prospectSolution->prospect_id = $prospect->id;
                 $prospectSolution->solution_id = $value;
