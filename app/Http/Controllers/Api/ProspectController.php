@@ -102,7 +102,10 @@ class ProspectController extends Controller
             ];
             return $response;
         } catch (\Exception $e) {
-            return $e;
+            $response = [
+                'success' => false,
+            ];
+            return $response;
         }
     }
 }
