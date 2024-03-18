@@ -42,7 +42,6 @@ class ProspectController extends Controller
                 $prospectSolution->solution_id = $value;
                 $prospectSolution->save();
             }
-
             $response = ['success' => true];
         } else {
             $response = ['success' => false];
@@ -81,7 +80,6 @@ class ProspectController extends Controller
                 'success' => false,
             ];
         }
-
         return $response;
     }
 
@@ -100,12 +98,11 @@ class ProspectController extends Controller
             $response = [
                 'success' => true,
             ];
-            return $response;
         } catch (\Exception $e) {
             $response = [
                 'success' => false,
             ];
-            return $response;
         }
+        return $response;
     }
 }
