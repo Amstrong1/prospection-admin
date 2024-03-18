@@ -73,9 +73,13 @@ class ProspectController extends Controller
         $prospect->email = $request->email;
 
         if ($prospect->save()) {
-            $response = 'success';
+            $response = [
+                'success' => true,
+            ];
         } else {
-            $response = 'error';
+            $response = [
+                'success' => false,
+            ];
         }
 
         return $response;
@@ -93,7 +97,10 @@ class ProspectController extends Controller
             }
             $prospect = Prospect::find($id);
             $prospect->delete();
-            return 'success';
+            $response = [
+                'success' => true,
+            ];
+            return $response;
         } catch (\Exception $e) {
             return $e;
         }
