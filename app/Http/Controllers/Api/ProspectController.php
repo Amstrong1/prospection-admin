@@ -87,11 +87,15 @@ class ProspectController extends Controller
     public function destroy($id)
     {
         try {
+            $prospectSolutions = ProspectSolution::where('prospect_id', $id)->get();
+            foreach ($prospectSolutions as $prospectSolution) {
+                $prospectSolution->delete();
+            }
             $prospect = Prospect::find($id);
             $prospect->delete();
             return 'success';
         } catch (\Exception $e) {
-            return 'error';
+            return $e;
         }
     }
 }
