@@ -35,10 +35,12 @@ class ProspectController extends Controller
         $prospect->email = $request->email;
 
         if ($prospect->save()) {
-            $prospectSolution = new ProspectSolution();
-            $prospectSolution->prospect_id = $prospect->id;
-            $prospectSolution->solution_id = $request->solution;
-            $prospectSolution->save();
+            foreach ($request->solutions as $value) {
+                $prospectSolution = new ProspectSolution();
+                $prospectSolution->prospect_id = $prospect->id;
+                $prospectSolution->solution_id = $value;
+                $prospectSolution->save();
+            }
 
             $response = ['success' => true];
         } else {
