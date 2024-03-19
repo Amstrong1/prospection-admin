@@ -27,6 +27,7 @@ class ProspectRequest extends FormRequest
             'address' => ['required', 'string', 'max:255'],
             'tel' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
+            'solutions' => ['required'],
         ];
     }
 }
