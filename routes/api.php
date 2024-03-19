@@ -4,9 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ReportController;
+use App\Http\Controllers\Api\SuspectController;
 use App\Http\Controllers\Api\ProspectController;
 use App\Http\Controllers\Api\SolutionController;
-use App\Http\Controllers\Api\SuspectController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -14,6 +14,18 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/set-password', [UserController::class, 'setPassword']);
 Route::post('/login', [UserController::class, 'login']);
+
+Route::get('/home/{id}', function ($id) {
+    $suspects = \App\Models\Suspect::where('user_id', $id)->count();
+    $prospects = \App\Models\Prospect::where('user_id', $id)->count();
+    $solutions = \App\Models\Solution::count();
+    $response = [
+        'suspects' => $suspects,
+        'prospects' => $prospects,
+        'solutions' => $solutions
+    ];
+    return $response;
+});
 
 Route::get('/prospect/{id}', [ProspectController::class, 'index']);
 Route::post('/prospect', [ProspectController::class, 'store']);
