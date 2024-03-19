@@ -18,10 +18,12 @@ Route::post('/login', [UserController::class, 'login']);
 Route::get('/home/{id}', function ($id) {
     $suspects = \App\Models\Suspect::where('user_id', $id)->count();
     $prospects = \App\Models\Prospect::where('user_id', $id)->count();
+    $reports = \App\Models\Report::where('user_id', $id)->count();
     $solutions = \App\Models\Solution::count();
     $response = [
         'suspects' => $suspects,
         'prospects' => $prospects,
+        'reports' => $reports,
         'solutions' => $solutions
     ];
     return $response;
