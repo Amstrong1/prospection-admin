@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class SolutionSuspect extends Model
 {
     use HasFactory;
+
+    public function prospect()
+    {
+        return $this->belongsTo(Prospect::class);
+    }
+
+    public function solution()
+    {
+        return $this->belongsTo(Solution::class);
+    }
 }
