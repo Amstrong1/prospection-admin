@@ -4,14 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\SolutionSuspect;
 use App\Models\Suspect;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SuspectController extends Controller
 {
     public function index()
     {
+        if (request()->method() == 'POST') {
+            if (request()->user_id == 'all') {
+                $suspects = Suspect::all();
+            } else {
+                $suspects = Suspect::where('user_id', request()->user_id)->get();
+            }
+            
+        } else {
+            $suspects = Suspect::all();
+        }
+
         return view('app.suspects.index', [
-            'suspects' => Suspect::all(),
+            'users' => User::where('is_admin', 0)->get(),
+            'suspects' => $suspects,
             'my_actions' => $this->suspect_actions(),
             'my_attributes' => $this->suspect_columns(),
         ]);

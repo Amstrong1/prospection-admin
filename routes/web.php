@@ -17,7 +17,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('solutions', SolutionController::class);
     Route::resource('prospects', ProspectController::class);
+    Route::match(['get', 'post'], 'prospects', [ProspectController::class, 'index'])->name('prospects.index');
     Route::resource('suspects', SuspectController::class);
+    Route::match(['get', 'post'], 'suspects', [SuspectController::class, 'index'])->name('suspects.index');
     Route::resource('reports', ReportController::class);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

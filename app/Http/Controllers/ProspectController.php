@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Prospect;
 use App\Models\ProspectSolution;
 
@@ -14,8 +15,20 @@ class ProspectController extends Controller
      */
     public function index()
     {
+        if (request()->method() == 'POST') {
+            if (request()->user_id == 'all') {
+                $prospects = Prospect::all();
+            } else {
+                $prospects = Prospect::where('user_id', request()->user_id)->get();
+            }
+            
+        } else {
+            $prospects = Prospect::all();
+        }
+
         return view('app.prospects.index', [
-            'prospects' => Prospect::all(),
+            'users' => User::where('is_admin', 0)->get(),
+            'prospects' => $prospects,
             'my_actions' => $this->prospect_actions(),
             'my_attributes' => $this->prospect_columns(),
         ]);

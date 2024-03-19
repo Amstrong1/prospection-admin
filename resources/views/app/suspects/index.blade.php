@@ -5,8 +5,22 @@
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-between">
                         <h1 class="font-bold text-lg my-2">
-                            {{ __('Listes des suspects') }}                            
+                            {{ __('Listes des suspects') }}
                         </h1>
+
+                        <form action="" method="post">
+                            @csrf
+                            <select class="rounded border-gray-300" name="user_id" id=""
+                                onchange="this.form.submit()">
+                                <option value="all">Tous les agents</option>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}" @selected($user->id == request()->user_id)>
+                                        {{ $user->lastname . ' ' . $user->firstname }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </form>
+
                     </div>
 
                     <div class="mt-4">
