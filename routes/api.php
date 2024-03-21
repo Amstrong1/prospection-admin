@@ -12,7 +12,7 @@ Route::get('/user/{id}', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/profile', [UserController::class, 'userData']);
+Route::get('/profile/{id}', [UserController::class, 'userData']);
 
 Route::post('/set-password', [UserController::class, 'setPassword']);
 Route::post('/login', [UserController::class, 'login']);
