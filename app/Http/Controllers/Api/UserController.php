@@ -43,7 +43,7 @@ class UserController extends Controller
         $user = User::find($request->user);
         $response = [];
 
-        if ($user !== null) {
+        if ($user !== null && Hash::check($request->old_password, $user->password)) {
             $user->password = Hash::make($request->password);
         }
 
