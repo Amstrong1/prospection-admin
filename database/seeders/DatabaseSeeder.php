@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Vibecro Corporation',
             'email' => 'contact@vibecro-corp.tech',
             'tel' => '55695656',
-            'address' => Hash::make('password'),
+            'address' => "Bohicon Houndonho",
             'logo' => 'logo.png',
         ]);
 
