@@ -29,6 +29,7 @@
             {{ $slot }}
         </div>
     </div>
+    @include('sweetalert::alert')
 
     <script>
         function showPassword() {
