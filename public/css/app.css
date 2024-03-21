@@ -898,9 +898,6 @@ select {
 .ms-1 {
   margin-inline-start: 0.25rem;
 }
-.ms-2 {
-  margin-inline-start: 0.5rem;
-}
 .ms-3 {
   margin-inline-start: 0.75rem;
 }
@@ -1696,10 +1693,6 @@ select {
 .text-green-700 {
   --tw-text-opacity: 1;
   color: rgb(21 128 61 / var(--tw-text-opacity));
-}
-.text-indigo-600 {
-  --tw-text-opacity: 1;
-  color: rgb(79 70 229 / var(--tw-text-opacity));
 }
 .text-indigo-700 {
   --tw-text-opacity: 1;
