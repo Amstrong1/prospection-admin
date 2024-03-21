@@ -15,7 +15,7 @@ class SolutionController extends Controller
         $structure = Auth::user()->structure;
 
         return view('app.solutions.index', [
-            'solutions' => $structure->solutions->get(),
+            'solutions' => $structure->solutions()->get(),
             'my_actions' => $this->solution_actions(),
             'my_attributes' => $this->solution_columns(),
         ]);
