@@ -29,6 +29,8 @@ class ProspectController extends Controller
     public function store(ProspectRequest $request)
     {
         $prospect = new Prospect();
+
+        $prospect->structure_id =  $request->user_structure;
         $prospect->user_id = $request->user;
         $prospect->firstname = $request->firstname;
         $prospect->lastname = $request->lastname;

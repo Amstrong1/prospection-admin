@@ -4,17 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Notifications\NewUserNotification;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Notifications\NewUserNotification;
 
 class UserController extends Controller
 {
     public function index()
     {
+        $structure = Auth::user()->structure;
         return view('app.users.index', [
-            'users' => User::where('is_admin', 0)->get(),
+            'users' => $structure->users()->where('role', 'user')->get(),
             'my_actions' => $this->user_actions(),
             'my_attributes' => $this->user_columns(),
         ]);
@@ -45,6 +47,7 @@ class UserController extends Controller
 
         $code = $this->generateRandomCode();
 
+        $user->structure_id = Auth::user()->structure_id;
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->address = $request->address;
@@ -99,18 +102,14 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        // try {
-        //     $user = $user->delete();
-        //     Alert::success("Suppression", "Succès");
-        //     return redirect('users');
-        // } catch (\Exception $e) {
-        //     Alert::error("Oops", "Une erreur est survenue",);
-        //     return back();
-        // }
-        $user->active = 0;
-        $user->save();
-        Alert::success("Suppression", "Succès");
-        return redirect('users');
+        try {
+            $user = $user->delete();
+            Alert::success("Suppression", "Succès");
+            return redirect('users');
+        } catch (\Exception $e) {
+            Alert::error("Oops", "Une erreur est survenue",);
+            return back();
+        }
     }
 
     private function user_columns()

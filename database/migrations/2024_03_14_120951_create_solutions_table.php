@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('solutions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('structure_id');
             $table->string('title');
             $table->text('description');
             $table->timestamps();

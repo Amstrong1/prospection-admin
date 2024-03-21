@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Solution;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StoreSolutionRequest;
 use App\Http\Requests\UpdateSolutionRequest;
@@ -12,8 +12,10 @@ class SolutionController extends Controller
 {
     public function index()
     {
+        $structure = Auth::user()->structure;
+
         return view('app.solutions.index', [
-            'solutions' => Solution::all(),
+            'solutions' => $structure->solutions->get(),
             'my_actions' => $this->solution_actions(),
             'my_attributes' => $this->solution_columns(),
         ]);
@@ -30,6 +32,7 @@ class SolutionController extends Controller
     {
         $solution = new Solution();
 
+        $solution->structure_id = Auth::user()->structure_id;
         $solution->title = $request->title;
         $solution->description = $request->description;
 
@@ -59,7 +62,7 @@ class SolutionController extends Controller
     }
 
     public function update(UpdateSolutionRequest $request, Solution $solution)
-    {        
+    {
         $solution->title = $request->title;
         $solution->description = $request->description;
 

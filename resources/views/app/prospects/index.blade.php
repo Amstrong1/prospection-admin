@@ -29,9 +29,9 @@
                                 <select class="rounded border-gray-300" name="suspect_response" id=""
                                     onchange="this.form.submit()">
                                     <option value="all">Toutes les réponses</option>
-                                    <option value="Oui">Oui</option>
-                                    <option value="Non">Non</option>
-                                    <option value="Indécis">Indécis</option>
+                                    <option value="Oui" @selected("Oui" == request()->user_id)>Oui</option>
+                                    <option value="Non" @selected("Non" == request()->user_id)>Non</option>
+                                    <option value="Indécis" @selected("Indécis" == request()->user_id)>Indécis</option>
                                 </select>
                             </form>
                         </div>

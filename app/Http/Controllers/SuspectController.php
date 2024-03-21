@@ -2,28 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SolutionSuspect;
-use App\Models\Suspect;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Models\Suspect;
+use App\Models\SolutionSuspect;
+use Illuminate\Support\Facades\Auth;
 
 class SuspectController extends Controller
 {
     public function index()
     {
+        $structure = Auth::user()->structure;
         if (request()->method() == 'POST') {
             if (request()->user_id == 'all') {
-                $suspects = Suspect::all();
+                $suspects = $structure->suspects()->get();
             } else {
-                $suspects = Suspect::where('user_id', request()->user_id)->get();
+                $suspects = $structure->suspects()->where('user_id', request()->user_id)->get();
             }
             
         } else {
-            $suspects = Suspect::all();
+            $suspects = $structure->suspects()->get();
         }
 
         return view('app.suspects.index', [
-            'users' => User::where('is_admin', 0)->get(),
+            'users' => User::where('role', 'user')->get(),
             'suspects' => $suspects,
             'my_actions' => $this->suspect_actions(),
             'my_attributes' => $this->suspect_columns(),

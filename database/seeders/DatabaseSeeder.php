@@ -21,7 +21,15 @@ class DatabaseSeeder extends Seeder
             'firstname' => 'John',
             'email' => 'test@example.com',
             'password' => Hash::make('password'),
-            'is_admin' => true,
+            'role' => 'admin',
+        ]);
+
+        User::factory()->create([
+            'lastname' => 'Super',
+            'firstname' => 'Admin',
+            'email' => 'contact@vibecro-corp.tech',
+            'password' => Hash::make('password'),
+            'role' => 'super_admin',
         ]);
     }
 }

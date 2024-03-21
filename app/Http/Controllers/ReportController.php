@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Report;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
     public function index()
     {
+        $structure = Auth::user()->structure;
         return view('app.reports.index', [
-            'reports' => Report::all(),
+            'reports' => $structure->reports->get(),
             'my_actions' => $this->report_actions(),
             'my_attributes' => $this->report_columns(),
         ]);

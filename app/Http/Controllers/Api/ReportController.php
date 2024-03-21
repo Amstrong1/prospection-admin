@@ -30,6 +30,7 @@ class ReportController extends Controller
         ]);
 
         $report = new Report();
+        $report->structure_id =  $request->user_structure;
         $report->user_id = $request->user;
         $report->prospect_id = $request->prospect;
         $report->report = $request->report;

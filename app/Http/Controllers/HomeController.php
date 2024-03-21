@@ -2,21 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Report;
-use App\Models\Suspect;
-use App\Models\Prospect;
-use App\Models\Solution;
+use App\Models\Structure;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     public function __invoke()
     {
-        $reports = Report::count();
-        $solutions = Solution::count();
-        $prospects = Prospect::count();
-        $suspects = Suspect::count();
-        $users = User::where('is_admin', false)->count();
-        return view('dashboard', compact('users', 'reports', 'solutions', 'prospects', 'suspects'));
+        if (Auth::user()->role == 'admin') {
+            $structure = Auth::user()->structure;
+            $reports = $structure->reports()->count();
+            $solutions = $structure->solutions()->count();
+            $prospects = $structure->prospects()->count();
+            $suspects = $structure->suspects()->count();
+            $users = $structure->users()->where('role', 'user')->count();
+            return view('dashboard', compact('users', 'reports', 'solutions', 'prospects', 'suspects'));
+        } elseif (Auth::user()->role == 'super_admin') {
+            $structures = Structure::all()->count();
+            return view('dashboard', compact('structures'));
+        }
     }
 }

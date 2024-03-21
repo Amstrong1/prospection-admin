@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('strucure_id');
             $table->string('lastname');
             $table->string('firstname');
             $table->string('tel')->nullable();
@@ -20,8 +21,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->boolean('is_admin')->default(false);
-            $table->boolean('active')->default(true);
+            $table->string('role')->default('user');
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });

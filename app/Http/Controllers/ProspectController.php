@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Prospect;
 use App\Models\ProspectSolution;
+use Illuminate\Support\Facades\Auth;
 
 class ProspectController extends Controller
 {
@@ -15,24 +15,25 @@ class ProspectController extends Controller
      */
     public function index()
     {
+        $structure = Auth::user()->structure;
         if (request()->method() == 'POST') {
             if (request()->user_id == 'all' && request()->suspect_response == 'all') {
-                $prospects = Prospect::all();
+                $prospects = $structure->prospects()->get();
             } elseif (request()->user_id == 'all' && request()->suspect_response != 'all') {
-                $prospects = Prospect::where('status', request()->suspect_response)->get();
+                $prospects = $structure->prospects()->where('status', request()->suspect_response)->get();
             } elseif (request()->user_id != 'all' && request()->suspect_response == 'all') {
-                $prospects = Prospect::where('user_id', request()->user_id)->get();
+                $prospects = $structure->prospects()->where('user_id', request()->user_id)->get();
             } else {
-                $prospects = Prospect::where('user_id', request()->user_id)
+                $prospects = $structure->prospects()->where('user_id', request()->user_id)
                     ->where('status', request()->suspect_response)
                     ->get();
             }
         } else {
-            $prospects = Prospect::all();
+            $prospects = $structure->prospects()->get();
         }
 
         return view('app.prospects.index', [
-            'users' => User::where('is_admin', 0)->get(),
+            'users' => $structure->users()->where('role', 'user')->get(),
             'prospects' => $prospects,
             'my_actions' => $this->prospect_actions(),
             'my_attributes' => $this->prospect_columns(),

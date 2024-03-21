@@ -20,6 +20,7 @@ class SuspectController extends Controller
     public function store(ProspectRequest $request)
     {
         $suspect = new Suspect();
+        $suspect->structure_id =  $request->user_structure;
         $suspect->user_id = $request->user;
         $suspect->firstname = $request->firstname;
         $suspect->lastname = $request->lastname;

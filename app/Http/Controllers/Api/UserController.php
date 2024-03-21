@@ -19,7 +19,7 @@ class UserController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-        if (Auth::attempt($credentials) && Auth::user()->active) {
+        if (Auth::attempt($credentials) && Auth::user()->deleted_at == null) {
             $response = [
                 'success' => true,
                 'user_id' => Auth::id(),
