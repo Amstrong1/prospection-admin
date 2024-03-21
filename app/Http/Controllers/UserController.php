@@ -99,14 +99,18 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        try {
-            $user = $user->delete();
-            Alert::success("Suppression", "Succès");
-            return redirect('users');
-        } catch (\Exception $e) {
-            Alert::error("Oops", "Une erreur est survenue",);
-            return back();
-        }
+        // try {
+        //     $user = $user->delete();
+        //     Alert::success("Suppression", "Succès");
+        //     return redirect('users');
+        // } catch (\Exception $e) {
+        //     Alert::error("Oops", "Une erreur est survenue",);
+        //     return back();
+        // }
+        $user->active = 0;
+        $user->save();
+        Alert::success("Suppression", "Succès");
+        return redirect('users');
     }
 
     private function user_columns()

@@ -36,11 +36,11 @@ class UserController extends Controller
     public function setPassword(Request $request)
     {
         $request->validate([
-            'email' => ['required', 'string', 'email', 'max:255'],
+            'old_password' => ['required'],
             'password' => ['required', 'confirmed', Password::defaults()],
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::find($request->user);
         $response = [];
 
         if ($user !== null) {
@@ -50,13 +50,23 @@ class UserController extends Controller
         if ($user->save()) {
             $response = [
                 'success' => true,
-                'user_id' => $user->id,
             ];
         } else {
             $response = [
                 'success' => false,
             ];
         }
+
+        return response()->json($response);
+    }
+
+    public function userData($id)
+    {
+        $user = User::find($id);
+        $response = [
+            'name' => $user->lastname . ' ' . $user->firstname,
+            'email' => $user->email,
+        ];
 
         return response()->json($response);
     }

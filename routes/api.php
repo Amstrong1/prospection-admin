@@ -8,9 +8,11 @@ use App\Http\Controllers\Api\SuspectController;
 use App\Http\Controllers\Api\ProspectController;
 use App\Http\Controllers\Api\SolutionController;
 
-Route::get('/user', function (Request $request) {
+Route::get('/user/{id}', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+
+Route::get('/profile', [UserController::class, 'userData']);
 
 Route::post('/set-password', [UserController::class, 'setPassword']);
 Route::post('/login', [UserController::class, 'login']);
