@@ -19,12 +19,12 @@ class ProspectController extends Controller
             if (request()->user_id == 'all' && request()->suspect_response == 'all') {
                 $prospects = Prospect::all();
             } elseif (request()->user_id == 'all' && request()->suspect_response != 'all') {
-                $prospects = Prospect::where('suspect_response', request()->suspect_response)->get();
+                $prospects = Prospect::where('status', request()->suspect_response)->get();
             } elseif (request()->user_id != 'all' && request()->suspect_response == 'all') {
                 $prospects = Prospect::where('user_id', request()->user_id)->get();
             } else {
                 $prospects = Prospect::where('user_id', request()->user_id)
-                    ->where('suspect_response', request()->suspect_response)
+                    ->where('status', request()->suspect_response)
                     ->get();
             }
         } else {
