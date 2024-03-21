@@ -57,7 +57,7 @@ class RegisteredUserController extends Controller
     
             return redirect(route('dashboard', absolute: false));
         } else {
-            Alert::toast('Structure non trouvée', 'Vérifier l\'adresse de l\'entreprise');
+            Alert::error('Structure non trouvée', 'Vérifier l\'adresse mail de l\'entreprise');
             return back()->withInput();
         }
         
