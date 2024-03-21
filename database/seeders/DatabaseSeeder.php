@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Structure;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -23,6 +22,15 @@ class DatabaseSeeder extends Seeder
             'tel' => '55695656',
             'address' => Hash::make('password'),
             'logo' => 'logo.png',
+        ]);
+
+        User::factory()->create([
+            'structure_id' => 1,
+            'lastname' => 'Super',
+            'firstname' => 'Admin',
+            'email' => 'contact@vibecro-corp.tech',
+            'password' => Hash::make('password'),
+            'role' => 'super_admin',
         ]);
     }
 }
