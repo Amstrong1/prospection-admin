@@ -15,6 +15,31 @@
     <!-- Scripts -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <script src="{{ mix('js/app.js') }}" defer></script>
+
+    <style>
+        .buttons-excel {
+            padding-bottom: 0.625rem;
+            padding-top: 0.625rem;
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+            background-color: rgb(4 108 78/1);
+            border-radius: 0.5rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .pagination {
+            display: inline-flex;
+        }
+
+        .pagination li {
+            padding: 8px;
+            box-sizing: border-box;
+            border-width: .5px;
+            border-style: solid;
+            border-color: #E5E7EB;
+        }
+    </style>
 </head>
 
 <body class="font-sans antialiased">
@@ -42,6 +67,9 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/r-2.3.0/datatables.min.js">
+    </script>
     <script defer src="{{ asset('js/main.js') }}"></script>
 
 </body>
