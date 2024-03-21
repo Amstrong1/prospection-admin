@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Structure;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -30,13 +31,20 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
+            'firstname' => ['required', 'string', 'max:255'],
+            'structure_email' => ['required', 'string', 'lowercase', 'email', 'max:255',],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $structure = Structure::where('email', $request->structure_email)->first();
+
         $user = User::create([
-            'name' => $request->name,
+            'lastname' => $request->lastname,
+            'firstname' => $request->firstname,
+            'structure_id' => $structure->id,
+            'role' => 'admin', 
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
