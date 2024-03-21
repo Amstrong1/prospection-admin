@@ -19,7 +19,7 @@ class UserController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials) && Auth::user()->active) {
             $response = [
                 'success' => true,
                 'user_id' => Auth::id(),

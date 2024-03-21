@@ -51,8 +51,8 @@ if (datasTable2.find("tbody tr").length > 0) {
     const dataTableInstance2 = datasTable2
         .DataTable({
             ordering: false,
-            // responsive: true,
-            // dom: 'rlftbp',
+            responsive: true,
+            dom: 'rlftbp',
             pageLength: 25,
             buttons: [{ extend: "excel", text: "Export en Excel" }],
             dom: 't<"grid p-4 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800" <"flex items-center col-span-3" B><"col-span-2"> <"flex col-span-4 mt-2 sm:mt-auto sm:justify-end"p>><"clear">',

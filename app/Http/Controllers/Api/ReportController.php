@@ -14,7 +14,7 @@ class ReportController extends Controller
      */
     public function index($id)
     {
-        $reports = Report::where('user_id', $id)->get();
+        $reports = Report::where('user_id', $id)->orderBy('id', 'desc')->get();
         return DataResource::collection($reports);
     }
 

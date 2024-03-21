@@ -19,7 +19,7 @@ class ProspectController extends Controller
      */
     public function index($id)
     {
-        $prospects = Prospect::where('user_id', $id)->with('solutions')->get();
+        $prospects = Prospect::where('user_id', $id)->with('solutions')->orderBy('id', 'desc')->get();
         return DataResource::collection($prospects);
     }
 
@@ -91,7 +91,6 @@ class ProspectController extends Controller
                 $prospectSolution->prospect_id = $prospect->id;
                 $prospectSolution->solution_id = $solution->id;
                 $prospectSolution->save();
-                $solution->delete();
             }
             $suspect->delete();
             $response = ['success' => true];

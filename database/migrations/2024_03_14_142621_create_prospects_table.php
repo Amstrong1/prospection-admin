@@ -19,7 +19,10 @@ return new class extends Migration
             $table->string('company');
             $table->string('address');
             $table->string('tel');
-            $table->string('email');           
+            $table->string('email');
+            $table->date('app_date');
+            $table->time('app_time');
+            $table->string('status');         
             $table->timestamps();
         });
     }

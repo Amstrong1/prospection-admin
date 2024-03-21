@@ -13,7 +13,7 @@ class SuspectController extends Controller
 {
     public function index($id)
     {
-        $suspects = Suspect::where('user_id', $id)->with('solutions')->get();
+        $suspects = Suspect::where('user_id', $id)->with('solutions')->orderBy('id', 'desc')->get();
         return DataResource::collection($suspects);
     }
 
