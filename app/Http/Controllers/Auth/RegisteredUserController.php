@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RegisteredUserController extends Controller
 {
@@ -40,19 +41,25 @@ class RegisteredUserController extends Controller
 
         $structure = Structure::where('email', $request->structure_email)->first();
 
-        $user = User::create([
-            'lastname' => $request->lastname,
-            'firstname' => $request->firstname,
-            'structure_id' => $structure->id,
-            'role' => 'admin', 
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return redirect(route('dashboard', absolute: false));
+        if ($structure !== null) {
+            $user = User::create([
+                'lastname' => $request->lastname,
+                'firstname' => $request->firstname,
+                'structure_id' => $structure->id,
+                'role' => 'admin', 
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+    
+            event(new Registered($user));
+    
+            Auth::login($user);
+    
+            return redirect(route('dashboard', absolute: false));
+        } else {
+            Alert::toast('Structure non trouvée', 'Vérifier l\'adresse de l\'entreprise');
+            return back();
+        }
+        
     }
 }
