@@ -31,6 +31,7 @@ Route::get('/home/{id}', function ($id) {
 
 Route::get('/prospect/{id}', [ProspectController::class, 'index']);
 Route::post('/prospect', [ProspectController::class, 'store']);
+Route::post('/prospect-from-suspect', [ProspectController::class, 'storeFromSuspect']);
 Route::post('/prospect/{id}', [ProspectController::class, 'update']);
 Route::delete('/prospect/{id}', [ProspectController::class, 'destroy']);
 

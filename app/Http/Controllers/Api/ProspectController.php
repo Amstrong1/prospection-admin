@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Report;
+use App\Models\Suspect;
 use App\Models\Prospect;
 use Illuminate\Http\Request;
+use App\Models\SolutionSuspect;
 use App\Models\ProspectSolution;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\DataResource;
@@ -33,6 +36,9 @@ class ProspectController extends Controller
         $prospect->address = $request->address;
         $prospect->tel = $request->tel;
         $prospect->email = $request->email;
+        $prospect->app_date = $request->app_date;
+        $prospect->app_time = $request->app_time;
+        $prospect->status = $request->status;
 
         if ($prospect->save()) {
             $solutions = json_decode($request->solutions);
@@ -42,6 +48,51 @@ class ProspectController extends Controller
                 $prospectSolution->solution_id = $value;
                 $prospectSolution->save();
             }
+            $response = ['success' => true];
+        } else {
+            $response = ['success' => false];
+        }
+
+        return $response;
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function storeFromSuspect(Request $request)
+    {
+        $suspect = Suspect::find($request->suspect);
+
+        $prospect = new Prospect();
+        $prospect->user_id = $request->user;
+        $prospect->firstname = $suspect->firstname;
+        $prospect->lastname = $suspect->lastname;
+        $prospect->company = $suspect->company;
+        $prospect->address = $suspect->address;
+        $prospect->tel = $suspect->tel;
+        $prospect->email = $suspect->email;
+        $prospect->app_date = $request->app_date;
+        $prospect->app_time = $request->app_time;
+        $prospect->status = $request->status;
+
+        if ($request->report !== null) {
+            $report = new Report();
+            $report->prospect_id = $prospect->id;
+            $report->user_id = $request->user;
+            $report->report = $request->report;
+            $report->save();
+        }
+
+        if ($prospect->save()) {
+            $solutions = SolutionSuspect::where('suspect_id', $prospect->id)->get();
+            foreach ($solutions as $solution) {
+                $prospectSolution = new ProspectSolution();
+                $prospectSolution->prospect_id = $prospect->id;
+                $prospectSolution->solution_id = $solution->id;
+                $prospectSolution->save();
+                $solution->delete();
+            }
+            $suspect->delete();
             $response = ['success' => true];
         } else {
             $response = ['success' => false];
