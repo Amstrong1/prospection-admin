@@ -47,11 +47,8 @@ class ProspectController extends Controller
         $columns = (object) [
             'recruiter_name' => 'Agents',
             'name' => 'Nom et prénom',
-            // 'company' => 'Entreprise',
-            // 'address' => 'Adresse',
-            // 'tel' => 'Tel',
-            // 'email' => 'Email',
             'solutions' => 'Solutions',
+            'status' => 'Reponse',
             'formatted_created_at' => 'Date',
         ];
         return $columns;
