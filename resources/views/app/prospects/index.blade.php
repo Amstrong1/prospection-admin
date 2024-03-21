@@ -8,7 +8,7 @@
                             {{ __('Listes des prospects') }}
                         </h1>
 
-                        <div class="flex">
+                        <div class="flex gap-2">
                             <form action="" method="post">
                                 @csrf
                                 <input type="hidden" name="suspect_response" value="{{ request()->suspect_response ?? "all" }}">
@@ -28,12 +28,10 @@
                                 <input type="hidden" name="user_id" value="{{ request()->user_id ?? "all" }}">
                                 <select class="rounded border-gray-300" name="suspect_response" id=""
                                     onchange="this.form.submit()">
-                                    <option value="all">Tous les agents</option>
-                                    @foreach ($users as $user)
-                                        <option value="{{ $user->id }}" @selected($user->id == request()->user_id)>
-                                            {{ $user->lastname . ' ' . $user->firstname }}
-                                        </option>
-                                    @endforeach
+                                    <option value="all">Toutes les réponses</option>
+                                    <option value="Oui">Oui</option>
+                                    <option value="Non">Non</option>
+                                    <option value="Indécis">Indécis</option>
                                 </select>
                             </form>
                         </div>
