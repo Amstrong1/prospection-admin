@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Structure;
 use Illuminate\Http\Request;
+use App\Mail\NewStructureMail;
+use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StoreStructureRequest;
 use App\Http\Requests\UpdateStructureRequest;
@@ -49,6 +51,7 @@ class StructureController extends Controller
         $structure->logo = $path;
 
         if ($structure->save()) {
+            Mail::to($request->email)->send(new NewStructureMail());
             Alert::toast("Opération éffectué avec succès", 'success');
             return redirect('structures');
         } else {
