@@ -8,18 +8,35 @@
                             {{ __('Listes des prospects') }}
                         </h1>
 
-                        <form action="" method="post">
-                            @csrf
-                            <select class="rounded border-gray-300" name="user_id" id=""
-                                onchange="this.form.submit()">
-                                <option value="all">Tous les agents</option>
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}" @selected($user->id == request()->user_id)>
-                                        {{ $user->lastname . ' ' . $user->firstname }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </form>
+                        <div class="flex">
+                            <form action="" method="post">
+                                @csrf
+                                <input type="hidden" name="suspect_response" value="{{ request()->suspect_response ?? "all" }}">
+                                <select class="rounded border-gray-300" name="user_id" id=""
+                                    onchange="this.form.submit()">
+                                    <option value="all">Tous les agents</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}" @selected($user->id == request()->user_id)>
+                                            {{ $user->lastname . ' ' . $user->firstname }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </form>
+
+                            <form action="" method="post">
+                                @csrf
+                                <input type="hidden" name="user_id" value="{{ request()->user_id ?? "all" }}">
+                                <select class="rounded border-gray-300" name="suspect_response" id=""
+                                    onchange="this.form.submit()">
+                                    <option value="all">Tous les agents</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}" @selected($user->id == request()->user_id)>
+                                            {{ $user->lastname . ' ' . $user->firstname }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </form>
+                        </div>
                     </div>
 
                     <div class="mt-4">
