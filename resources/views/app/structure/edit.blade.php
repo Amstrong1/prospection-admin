@@ -4,7 +4,7 @@
             <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h1>{{ __('Modifier les infos') }}</h1>
-                    <x-forms.update :item="$structure" :fields="$my_fields" type="structure" />
+                    <x-forms.edit :item="$structure" :fields="$my_fields" type="structure" />
                 </div>
             </div>
         </div>
