@@ -12,17 +12,12 @@ class SuspectController extends Controller
     public function index()
     {
         if (request()->method() == 'POST') {
-            if (request()->user_id == 'all' && request()->suspect_response == 'all') {
+            if (request()->user_id == 'all') {
                 $suspects = Suspect::all();
-            } elseif (request()->user_id != 'all' && request()->suspect_response == 'all') {
-                $suspects = Suspect::where('user_id', request()->user_id)->get();
-            } elseif (request()->user_id == 'all' && request()->suspect_response != 'all') {
-                $suspects = Suspect::where('suspect_response', request()->suspect_response)->get();
             } else {
-                $suspects = Suspect::where('user_id', request()->user_id)
-                    ->where('suspect_response', request()->suspect_response)
-                    ->get();
+                $suspects = Suspect::where('user_id', request()->user_id)->get();
             }
+            
         } else {
             $suspects = Suspect::all();
         }
