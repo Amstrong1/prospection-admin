@@ -75,15 +75,16 @@ class ProspectController extends Controller
         $prospect->app_time = $request->app_time;
         $prospect->status = $request->status;
 
-        if ($request->report !== null) {
-            $report = new Report();
-            $report->prospect_id = $prospect->id;
-            $report->user_id = $request->user;
-            $report->report = $request->report;
-            $report->save();
-        }
-
         if ($prospect->save()) {
+
+            if ($request->report !== null) {
+                $report = new Report();
+                $report->prospect_id = $prospect->id;
+                $report->user_id = $request->user;
+                $report->report = $request->report;
+                $report->save();
+            }
+
             $solutions = SolutionSuspect::where('suspect_id', $prospect->id)->get();
             foreach ($solutions as $solution) {
                 $prospectSolution = new ProspectSolution();
