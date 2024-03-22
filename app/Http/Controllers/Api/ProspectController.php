@@ -82,6 +82,7 @@ class ProspectController extends Controller
 
             if ($request->report !== null) {
                 $report = new Report();
+                $report->structure_id = $prospect->structure_id;
                 $report->prospect_id = $prospect->id;
                 $report->user_id = $request->user;
                 $report->report = $request->report;
