@@ -40,6 +40,7 @@
             border-color: #E5E7EB;
         }
     </style>
+    @laravelPWA
 </head>
 
 <body class="font-sans antialiased">

@@ -66,7 +66,8 @@ class ProspectController extends Controller
         $suspect = Suspect::find($request->suspect);
 
         $prospect = new Prospect();
-        $prospect->user_id = $request->user;
+        $prospect->structure_id = $suspect->structure_id;
+        $prospect->user_id = $suspect->user_id;
         $prospect->firstname = $suspect->firstname;
         $prospect->lastname = $suspect->lastname;
         $prospect->company = $suspect->company;

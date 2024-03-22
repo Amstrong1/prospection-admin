@@ -23,6 +23,7 @@ class UserController extends Controller
             $response = [
                 'success' => true,
                 'user_id' => Auth::id(),
+                'structure_id' => Auth::user()->structure_id,
             ];
         } else {
             $response = [
