@@ -42,8 +42,7 @@ Route::post('/suspect', [SuspectController::class, 'store']);
 Route::post('/suspect/{id}', [SuspectController::class, 'update']);
 Route::delete('/suspect/{id}', [SuspectController::class, 'destroy']);
 
-Route::get('/report', [ReportController::class, 'index']);
-Route::get('/report/{id}', [ReportController::class, 'show']);
+Route::get('/report/{id}', [ReportController::class, 'index']);
 Route::post('/report', [ReportController::class, 'store']);
 Route::post('/report/{id}', [ReportController::class, 'update']);
 Route::delete('/report/{id}', [ReportController::class, 'destroy']);

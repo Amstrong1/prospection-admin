@@ -47,11 +47,11 @@ class ReportController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
-    {
-        $prospect = Report::find($id);
-        return new DataResource($prospect);
-    }
+    // public function show($id)
+    // {
+    //     $prospect = Report::find($id);
+    //     return new DataResource($prospect);
+    // }
 
     /**
      * Update the specified resource in storage.
