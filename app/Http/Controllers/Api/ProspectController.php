@@ -19,7 +19,7 @@ class ProspectController extends Controller
      */
     public function index($id)
     {
-        $prospects = Prospect::where('user_id', $id)->with('solutions')->orderBy('id', 'desc')->get();
+        $prospects = Prospect::where('user_id', $id)->with('solutions')->with('reports')->orderBy('id', 'desc')->get();
         return DataResource::collection($prospects);
     }
 

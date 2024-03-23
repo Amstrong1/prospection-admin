@@ -21,6 +21,11 @@ class Prospect extends Model
         return $this->belongsToMany(Solution::class, 'prospect_solutions');
     } 
 
+    public function reports()
+    {
+        return $this->hasMany(Report::class, 'prospect_id');
+    } 
+
     public function getNameAttribute()
     {
         return $this->lastname . ' ' . $this->firstname;
