@@ -18,15 +18,15 @@ Route::post('/set-password', [UserController::class, 'setPassword']);
 Route::post('/login', [UserController::class, 'login']);
 
 Route::get('/home/{id}', function ($id) {
-    $suspects = \App\Models\Suspect::where('user_id', $id)->count();
     $prospects = \App\Models\Prospect::where('user_id', $id)->count();
-    $reports = \App\Models\Report::where('user_id', $id)->count();
-    $solutions = \App\Models\Solution::count();
+    $prospectsYes = \App\Models\Prospect::where('user_id', $id)->where('status', 'Oui')->count();
+    $prospectsNo = \App\Models\Prospect::where('user_id', $id)->where('status', 'Non')->count();
+    $prospectsInd = \App\Models\Prospect::where('user_id', $id)->where('status', 'Indecis')->count();
     $response = [
-        'suspects' => $suspects,
         'prospects' => $prospects,
-        'reports' => $reports,
-        'solutions' => $solutions
+        'prospectsYes' => $prospectsYes,
+        'prospectsNo' => $prospectsNo,
+        'prospectsInd' => $prospectsInd
     ];
     return $response;
 });
