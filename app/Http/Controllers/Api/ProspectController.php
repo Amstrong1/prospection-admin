@@ -43,6 +43,15 @@ class ProspectController extends Controller
         $prospect->status = $request->status;
 
         if ($prospect->save()) {
+            if ($request->report !== null) {
+                $report = new Report();
+                $report->structure_id = $prospect->structure_id;
+                $report->prospect_id = $prospect->id;
+                $report->user_id = $request->user;
+                $report->report = $request->report;
+                $report->save();
+            }
+            
             $solutions = json_decode($request->solutions);
             foreach ($solutions as $value) {
                 $prospectSolution = new ProspectSolution();
