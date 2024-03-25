@@ -106,10 +106,6 @@ class ProspectController extends Controller
                 'title' => 'Email',
                 'field' => 'email'
             ],
-            'report' => [
-                'title' => 'Rapport',
-                'field' => 'textarea'
-            ],
             'solutions' => [
                 'title' => 'Solutions',
                 'field' => 'checkbox',

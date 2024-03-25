@@ -74,7 +74,7 @@
                             </x-nav-link>
                         </li>
 
-                        {{-- <li class="mx-2" data-te-nav-item-ref>
+                        <li class="mx-2" data-te-nav-item-ref>
                             <x-nav-link
                                 class="block py-2 pr-2 transition duration-150 ease-in-out hover:text-neutral-600 focus:text-neutral-600 lg:px-2"
                                 :href="route('reports.index')" :active="request()->routeIs('reports.*')" data-te-ripple-init data-te-ripple-color="light">
@@ -86,7 +86,7 @@
                                 &nbsp;
                                 {{ __('Rapports') }}
                             </x-nav-link>
-                        </li> --}}
+                        </li>
                     </ul>
                 @elseif(Auth::user()->role == 'super_admin')
                     <ul class="mr-auto flex flex-row" data-te-navbar-nav-ref>
