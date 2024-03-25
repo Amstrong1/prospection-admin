@@ -7,7 +7,11 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         {{-- <x-application-logo class="block w-6 fill-current text-gray-800" /> --}}
-                        <img src="{{ asset('img/vibecro1.png') }}" class="h-12" alt="vibecro" srcset="">
+                        @if (auth()->user()->role == 'super_admin')
+                            <img src="{{ asset('img/vibecro1.png') }}" class="h-12" alt="vibecro" srcset="">
+                        @else
+                            <img src="{{ 'storage/' . auth()->user()->structure->logo }}" class="h-12" alt="{{ auth()->user()->structure->logo }}" srcset="">
+                        @endif
                     </a>
                 </div>
 
