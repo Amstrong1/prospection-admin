@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('structure_id')->constrained();
             $table->string('longitude');
             $table->string('latitude');
+            $table->string('address');
             $table->timestamps();
         });
     }
