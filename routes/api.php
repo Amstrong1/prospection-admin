@@ -1,13 +1,14 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\SuspectController;
 use App\Http\Controllers\Api\ProspectController;
 use App\Http\Controllers\Api\SolutionController;
-use Illuminate\Support\Facades\Auth;
 
 Route::get('/user/{id}', function (Request $request) {
     return $request->user();
@@ -24,7 +25,7 @@ Route::get('/home/{id}', function ($id) {
     $prospectsNo = \App\Models\Prospect::where('user_id', $id)->where('status', 'Non')->count();
     $prospectsInd = \App\Models\Prospect::where('user_id', $id)->where('status', 'Indecis')->count();
     $response = [
-        'structure' => Auth::user()->structure->name,
+        'structure' => User::where('id', $id)->first()->structure->name,
         'prospects' => $prospects,
         'prospectsYes' => $prospectsYes,
         'prospectsNo' => $prospectsNo,
