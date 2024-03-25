@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\SuspectController;
 use App\Http\Controllers\Api\ProspectController;
 use App\Http\Controllers\Api\SolutionController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/user/{id}', function (Request $request) {
     return $request->user();
@@ -23,6 +24,7 @@ Route::get('/home/{id}', function ($id) {
     $prospectsNo = \App\Models\Prospect::where('user_id', $id)->where('status', 'Non')->count();
     $prospectsInd = \App\Models\Prospect::where('user_id', $id)->where('status', 'Indecis')->count();
     $response = [
+        'structure' => Auth::user()->structure->name,
         'prospects' => $prospects,
         'prospectsYes' => $prospectsYes,
         'prospectsNo' => $prospectsNo,
