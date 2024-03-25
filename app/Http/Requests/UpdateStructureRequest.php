@@ -23,7 +23,6 @@ class UpdateStructureRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:3', 'max:255'],
-            'email' => ['required', 'unique:structures', 'email:filter'],
             'address' => ['required', 'string', 'min:3', 'max:255'],
             'tel' => ['required', 'string', 'min:3', 'max:255'],
         ];

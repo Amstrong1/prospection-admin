@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Mail\NewStructureMail;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreStructureRequest;
 use App\Http\Requests\UpdateStructureRequest;
 
@@ -91,14 +92,24 @@ class StructureController extends Controller
             $path = $request->file('logo')->storeAs('logos', $fileName, 'public');
         }
 
+        if ($request->email !== null && $structure->email !== $request->email) {
+            validator(['email' => $request->email])->validate();
+            $validator = Validator::make($request->email, [
+                'email' => 'required|email|unique:users,email',
+            ]);
+        }
+
         $structure->name = $request->name;
         $structure->address = $request->address;
         $structure->tel = $request->tel;
-        $structure->email = $request->email;
+        if ($validator) {
+            $structure->email = $request->email;
+        }
+
         if (isset($path)) {
             $structure->logo = $path;
         }
-        
+
         if ($structure->save()) {
             Alert::toast("Modification éffectuée succès", 'success');
             return redirect('structures');
