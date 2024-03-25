@@ -39,7 +39,7 @@
                                             <div class="relative h-12 w-12 mr-3 md:block">
                                                 <img class="object-cover w-full h-full rounded-lg"
                                                     src="{{ $resource->{$column} !== null
-                                                        ? url('storage/' . $resource->{$column})
+                                                        ? url('logos/' . $resource->{$column})
                                                         : 'https://ui-avatars.com/api/?background=random&name=' . $resource->fullname }}"
                                                     alt="" loading="lazy">
                                             </div>
