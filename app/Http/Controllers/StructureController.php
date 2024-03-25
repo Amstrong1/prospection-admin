@@ -94,17 +94,15 @@ class StructureController extends Controller
 
         if ($request->email !== null && $structure->email !== $request->email) {
             validator(['email' => $request->email])->validate();
-            $validator = Validator::make($request->email, [
+           Validator::make($request->email, [
                 'email' => 'required|email|unique:users,email',
             ]);
+            $structure->email = $request->email;
         }
 
         $structure->name = $request->name;
         $structure->address = $request->address;
         $structure->tel = $request->tel;
-        if ($validator) {
-            $structure->email = $request->email;
-        }
 
         if (isset($path)) {
             $structure->logo = $path;
