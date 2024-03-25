@@ -9,7 +9,7 @@ use App\Http\Resources\DataResource;
 class SolutionController extends Controller
 {
     public function index($id) {
-        $solutions = Solution::where('strucure_id', $id)->get();
+        $solutions = Solution::where('structure_id', $id)->get();
         return DataResource::collection($solutions);
     }
 }
