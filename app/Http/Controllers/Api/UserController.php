@@ -80,6 +80,7 @@ class UserController extends Controller
         $location->structure_id = $request->structure_id;
         $location->longitude = $request->longitude;
         $location->latitude = $request->latitude;
+        $location->address = $request->address;
         $location->save();
     }
 }
