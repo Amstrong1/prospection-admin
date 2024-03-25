@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\User;
+use App\Models\UserLocation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -70,5 +71,15 @@ class UserController extends Controller
         ];
 
         return response()->json($response);
+    }
+
+    public function storeLocation(Request $request)
+    {
+        $location = new UserLocation();
+        $location->user_id = $request->user_id;
+        $location->structure_id = $request->structure_id;
+        $location->longitude = $request->longitude;
+        $location->latitude = $request->latitude;
+        $location->save();
     }
 }

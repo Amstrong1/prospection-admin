@@ -18,6 +18,7 @@ Route::get('/profile/{id}', [UserController::class, 'userData']);
 
 Route::post('/set-password', [UserController::class, 'setPassword']);
 Route::post('/login', [UserController::class, 'login']);
+Route::post('/location', [UserController::class, 'storeLocation']);
 
 Route::get('/home/{id}', function ($id) {
     $prospects = \App\Models\Prospect::where('user_id', $id)->count();
