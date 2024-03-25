@@ -47,4 +47,4 @@ Route::post('/report', [ReportController::class, 'store']);
 Route::post('/report/{id}', [ReportController::class, 'update']);
 Route::delete('/report/{id}', [ReportController::class, 'destroy']);
 
-Route::get('/solution', [SolutionController::class, 'index']);
+Route::get('/solution/{id}', [SolutionController::class, 'index']);

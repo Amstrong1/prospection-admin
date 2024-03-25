@@ -8,8 +8,8 @@ use App\Http\Resources\DataResource;
 
 class SolutionController extends Controller
 {
-    public function index() {
-        $solutions = Solution::all();
+    public function index($id) {
+        $solutions = Solution::where('strucure_id', $id)->get();
         return DataResource::collection($solutions);
     }
 }
