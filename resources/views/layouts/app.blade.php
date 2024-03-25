@@ -52,7 +52,7 @@
         </header>
 
         <!-- Page Content -->
-        <main>
+        <main class="">
             {{ $slot }}
         </main>
 

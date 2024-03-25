@@ -43,7 +43,6 @@ class StructureController extends Controller
         $structure = new Structure();
 
         $fileName = time() . '.' . $request->logo->extension();
-        // $path = $request->file('logo')->storeAs('logos', $fileName, 'public');
         $request->logo->move(public_path('logos'), $fileName);
 
 
@@ -89,12 +88,6 @@ class StructureController extends Controller
     {
         $structure = Structure::find($structure->id);
 
-        if ($request->logo !== null) {
-            $fileName = time() . '.' . $request->logo->extension();
-            // $path = $request->file('logo')->storeAs('logos', $fileName, 'public');
-            $request->logo->move(public_path('logos'), $fileName);
-        }
-
         if ($request->email !== null && $structure->email !== $request->email) {
             validator(['email' => $request->email])->validate();
            Validator::make($request->email, [
@@ -107,8 +100,10 @@ class StructureController extends Controller
         $structure->address = $request->address;
         $structure->tel = $request->tel;
 
-        if (isset($path)) {
-            $structure->logo = $path;
+        if ($request->logo !== null) {
+            $fileName = time() . '.' . $request->logo->extension();
+            $request->logo->move(public_path('logos'), $fileName);
+            $structure->logo = $fileName;
         }
 
         if ($structure->save()) {
