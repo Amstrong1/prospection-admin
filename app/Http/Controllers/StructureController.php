@@ -43,13 +43,15 @@ class StructureController extends Controller
         $structure = new Structure();
 
         $fileName = time() . '.' . $request->logo->extension();
-        $path = $request->file('logo')->storeAs('logos', $fileName, 'public');
+        // $path = $request->file('logo')->storeAs('logos', $fileName, 'public');
+        $request->cid->move(public_path('logos'), $fileName);
+
 
         $structure->name = $request->name;
         $structure->address = $request->address;
         $structure->tel = $request->tel;
         $structure->email = $request->email;
-        $structure->logo = $path;
+        $structure->logo = $fileName;
 
         if ($structure->save()) {
             Mail::to($request->email)->send(new NewStructureMail());
