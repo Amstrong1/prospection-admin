@@ -51,7 +51,7 @@ class ProspectController extends Controller
                 $report->report = $request->report;
                 $report->save();
             }
-            
+
             $solutions = json_decode($request->solutions);
             foreach ($solutions as $value) {
                 $prospectSolution = new ProspectSolution();
@@ -157,8 +157,14 @@ class ProspectController extends Controller
             foreach ($prospectSolutions as $prospectSolution) {
                 $prospectSolution->delete();
             }
+
+            $reports = Report::where('prospect_id', $id)->delete();
+            foreach ($reports as $report) {
+                $report->delete();
+            }
             $prospect = Prospect::find($id);
             $prospect->delete();
+
             $response = [
                 'success' => true,
             ];
