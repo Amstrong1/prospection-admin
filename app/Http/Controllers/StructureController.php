@@ -87,7 +87,7 @@ class StructureController extends Controller
     {
         $structure = Structure::find($structure->id);
 
-        if ($request->file !== null) {
+        if ($request->logo !== null) {
             $fileName = time() . '.' . $request->logo->extension();
             $path = $request->file('logo')->storeAs('logos', $fileName, 'public');
         }
