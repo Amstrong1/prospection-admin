@@ -9,7 +9,7 @@ class Prospect extends Model
 {
     use HasFactory;
 
-    protected $append = ['name', 'recruiter_name', 'solutions', 'formatted_created_at']; 
+    protected $append = ['name', 'recruiter_name', 'solutions', 'formatted_created_at', 'reports']; 
 
     public function user()
     {
@@ -49,5 +49,10 @@ class Prospect extends Model
     public function getFormattedCreatedAtAttribute()
     {
         return $this->created_at->format('d/m/Y - H:i');
+    }
+
+    public function getReportsAttribute()
+    {
+        return $this->reports()->first();
     }
 }

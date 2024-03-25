@@ -901,9 +901,6 @@ select {
 .ms-3 {
   margin-inline-start: 0.75rem;
 }
-.ms-4 {
-  margin-inline-start: 1rem;
-}
 .mt-1 {
   margin-top: 0.25rem;
 }
@@ -992,9 +989,6 @@ select {
 .h-8 {
   height: 2rem;
 }
-.h-9 {
-  height: 2.25rem;
-}
 .h-full {
   height: 100%;
 }
@@ -1021,9 +1015,6 @@ select {
 }
 .w-4 {
   width: 1rem;
-}
-.w-40 {
-  width: 10rem;
 }
 .w-48 {
   width: 12rem;
@@ -1162,9 +1153,6 @@ select {
 }
 .justify-between {
   justify-content: space-between;
-}
-.justify-around {
-  justify-content: space-around;
 }
 .justify-items-center {
   justify-items: center;

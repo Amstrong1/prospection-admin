@@ -6,14 +6,16 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        {{-- <x-application-logo class="block w-6 fill-current text-gray-800" /> --}}
+                        <img src="{{ asset('img/vibecro1.png') }}" class="h-12" alt="vibecro" srcset="">
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Prospection App') }}
+                        {{-- {{ __('Prospection App') }} --}}
+                        {{ auth()->user()->structure->name }}
                     </x-nav-link>
                 </div>
             </div>
