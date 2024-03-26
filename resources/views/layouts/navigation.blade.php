@@ -10,7 +10,7 @@
                         @if (auth()->user()->role == 'super_admin')
                             <img src="{{ asset('img/vibecro1.png') }}" class="h-12" alt="vibecro" srcset="">
                         @else
-                            <img src="{{ 'storage/' . auth()->user()->structure->logo }}" class="h-12" alt="{{ auth()->user()->structure->logo }}" srcset="">
+                            <img src="{{ 'logos/' . auth()->user()->structure->logo }}" class="h-12" alt="{{ 'logo' }}" srcset="">
                         @endif
                     </a>
                 </div>
