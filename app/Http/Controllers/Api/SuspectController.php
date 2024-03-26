@@ -52,8 +52,9 @@ class SuspectController extends Controller
      */
     public function show($id)
     {
-        $suspect = Suspect::find($id)->with('solutions');
-        return new DataResource($suspect);
+        $suspect = Suspect::find($id);
+        $solutions = $suspect->solutions();
+        return new DataResource($suspect, $solutions);
     }
 
     public function update(ProspectRequest $request, $id)
