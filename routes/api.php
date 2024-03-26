@@ -35,13 +35,15 @@ Route::get('/home/{id}', function ($id) {
     return $response;
 });
 
-Route::get('/prospect/{id}', [ProspectController::class, 'index']);
+Route::get('/prospects/{id}', [ProspectController::class, 'index']);
+Route::get('/prospect/{id}', [ProspectController::class, 'show']);
 Route::post('/prospect', [ProspectController::class, 'store']);
 Route::post('/prospect-from-suspect', [ProspectController::class, 'storeFromSuspect']);
 Route::post('/prospect/{id}', [ProspectController::class, 'update']);
 Route::delete('/prospect/{id}', [ProspectController::class, 'destroy']);
 
-Route::get('/suspect/{id}', [SuspectController::class, 'index']);
+Route::get('/suspects/{id}', [SuspectController::class, 'index']);
+Route::get('/suspect/{id}', [SuspectController::class, 'show']);
 Route::post('/suspect', [SuspectController::class, 'store']);
 Route::post('/suspect/{id}', [SuspectController::class, 'update']);
 Route::delete('/suspect/{id}', [SuspectController::class, 'destroy']);

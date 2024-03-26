@@ -47,6 +47,15 @@ class SuspectController extends Controller
         return $response;
     }
 
+    /**
+     * Display the specified resource.
+     */
+    public function show($id)
+    {
+        $suspect = Suspect::find($id);
+        return new DataResource($suspect);
+    }
+
     public function update(ProspectRequest $request, $id)
     {
         $suspect = Suspect::find($id);
