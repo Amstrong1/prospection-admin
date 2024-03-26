@@ -134,6 +134,21 @@ class ProspectController extends Controller
         $prospect->address = $request->address;
         $prospect->tel = $request->tel;
         $prospect->email = $request->email;
+        $prospect->app_date = $request->app_date;
+        $prospect->app_time = $request->app_time;
+        $prospect->status = $request->status;
+
+        $solutions = json_decode($request->solutions);
+        foreach ($solutions as $value) {
+            $oldSolutions = ProspectSolution::where('prospect_id', $prospect->id)->get();
+            foreach ($oldSolutions as $oldSolution) {
+                $oldSolution->delete();
+            }
+            $prospectSolution = new ProspectSolution();
+            $prospectSolution->prospect_id = $prospect->id;
+            $prospectSolution->solution_id = $value;
+            $prospectSolution->save();
+        }
 
         if ($prospect->save()) {
             $response = [
