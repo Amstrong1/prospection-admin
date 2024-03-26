@@ -101,7 +101,7 @@ class ProspectController extends Controller
             $solutions = SolutionSuspect::where('suspect_id', $prospect->id)->get();
             foreach ($solutions as $solution) {
                 $prospectSolution = new ProspectSolution();
-                $prospectSolution->prospect_id = $prospect->id;
+                $prospectSolution->prospect_id = $solution->id;
                 $prospectSolution->solution_id = $solution->id;
                 $prospectSolution->save();
             }
