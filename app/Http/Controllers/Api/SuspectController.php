@@ -52,7 +52,7 @@ class SuspectController extends Controller
      */
     public function show($id)
     {
-        $suspect = Suspect::find($id);
+        $suspect = Suspect::find($id)->with('solutions');
         return new DataResource($suspect);
     }
 
