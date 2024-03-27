@@ -102,7 +102,7 @@ class ProspectController extends Controller
             foreach ($solutions as $solution) {
                 $prospectSolution = new ProspectSolution();
                 $prospectSolution->prospect_id = $prospect->id;
-                $prospectSolution->solution_id = $solution->id;
+                $prospectSolution->solution_id = $solution->solution_id;
                 $prospectSolution->save();
             }
             $suspect->delete();
