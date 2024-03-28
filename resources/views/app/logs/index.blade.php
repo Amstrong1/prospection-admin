@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <x-tables.default :resources="$logs" :mattributes="$my_attributes" type="log" />
+                        <x-tables.default :resources="$logs" :mattributes="$my_attributes" type="log" :mactions="$my_actions" />
                     </div>
                 </div>
             </div>

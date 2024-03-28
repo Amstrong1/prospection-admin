@@ -11,7 +11,8 @@ class LogController extends Controller
         $logs = UserLocation::where('structure_id', auth()->user()->structure_id)->orderBy('created_at', 'desc')->get();
         return view('app.logs.index', [
             'logs' => $logs, 
-            'my_attributes' => $this->prospect_columns()
+            'my_attributes' => $this->prospect_columns(),
+            'my_actions' => [],
         ]);
     }
 
@@ -26,4 +27,6 @@ class LogController extends Controller
         ];
         return $columns;
     }
+
+
 }
