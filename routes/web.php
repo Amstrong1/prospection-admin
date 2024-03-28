@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReportController;
@@ -24,6 +25,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('reports', ReportController::class);
 
     Route::resource('structures', StructureController::class);
+
+    Route::get('/logs', [LogController::class, 'index'])->name('logs.edit');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
