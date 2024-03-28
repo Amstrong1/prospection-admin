@@ -14,7 +14,7 @@ class UserLocation extends Model
         'agent'
     ];
 
-    public function agent()
+    public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
