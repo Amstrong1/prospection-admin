@@ -12,7 +12,7 @@ class LogController extends Controller
         return view('app.logs.index', [
             'logs' => $logs, 
             'my_attributes' => $this->prospect_columns(),
-            'my_actions' => [],
+            // 'my_actions' => [],
         ]);
     }
 
