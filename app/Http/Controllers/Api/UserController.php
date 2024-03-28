@@ -76,8 +76,8 @@ class UserController extends Controller
     public function storeLocation(Request $request)
     {
         $location = new UserLocation();
-        $location->user_id = $request->user_id;
-        $location->structure_id = $request->structure_id;
+        $location->user_id = $request->user;
+        $location->structure_id = $request->user_structure;
         $location->longitude = $request->longitude;
         $location->latitude = $request->latitude;
         $location->address = $request->address;
