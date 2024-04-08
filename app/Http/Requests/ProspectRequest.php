@@ -22,11 +22,11 @@ class ProspectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'firstname' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
+            // 'firstname' => ['required', 'string', 'max:255'],
+            // 'lastname' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
-            'tel' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
+            // 'tel' => ['required', 'string', 'max:255'],
+            // 'email' => ['required', 'string', 'email', 'max:255'],
             'solutions' => ['required'],
         ];
     }
