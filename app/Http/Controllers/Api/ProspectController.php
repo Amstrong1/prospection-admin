@@ -77,12 +77,12 @@ class ProspectController extends Controller
         $prospect = new Prospect();
         $prospect->structure_id = $suspect->structure_id;
         $prospect->user_id = $suspect->user_id;
-        $prospect->firstname = $suspect->firstname;
-        $prospect->lastname = $suspect->lastname;
+        $prospect->firstname = $request->firstname;
+        $prospect->lastname = $request->lastname;
         $prospect->company = $suspect->company;
         $prospect->address = $suspect->address;
-        $prospect->tel = $suspect->tel;
-        $prospect->email = $suspect->email;
+        $prospect->tel = $request->tel;
+        $prospect->email = $request->email;
         $prospect->app_date = $request->app_date;
         $prospect->app_time = $request->app_time;
         $prospect->status = $request->status;
