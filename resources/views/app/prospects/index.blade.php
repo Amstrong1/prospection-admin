@@ -33,7 +33,7 @@
                                 </div>
 
                                 <select class="border-gray-300" name="user_id" onchange="this.form.submit()">
-                                    <option value="all">Tous les agents</option>
+                                    <option value="">Tous les agents</option>
                                     @foreach ($users as $user)
                                         <option value="{{ $user->id }}" @selected($user->id == request()->user_id)>
                                             {{ $user->lastname . ' ' . $user->firstname }}
@@ -42,7 +42,7 @@
                                 </select>
 
                                 <select class="border-gray-300" name="suspect_response" onchange="this.form.submit()">
-                                    <option value="all">Toutes les réponses</option>
+                                    <option value="">Toutes les réponses</option>
                                     <option value="Oui" @selected('Oui' == request()->suspect_response)>Oui</option>
                                     <option value="Non" @selected('Non' == request()->suspect_response)>Non</option>
                                     <option value="Indécis" @selected('Indécis' == request()->suspect_response)>Indécis</option>

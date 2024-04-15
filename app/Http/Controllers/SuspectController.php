@@ -23,8 +23,6 @@ class SuspectController extends Controller
             if (request()->filled('start') && request()->filled('end') && request()->end > request()->start) {
                 $suspects = $suspects->where('created_at', '>=', request()->start)
                     ->where('created_at', '<=', request()->end)
-                    ->orderBy('app_date', 'desc')
-                    ->where('user_id', request()->user_id)
                     ->orderBy('app_date', 'desc');
             }
 

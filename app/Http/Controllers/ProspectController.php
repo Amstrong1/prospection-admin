@@ -32,8 +32,6 @@ class ProspectController extends Controller
             if (request()->filled('start') && request()->filled('end') && request()->end > request()->start) {
                 $prospects = $prospects->where('created_at', '>=', request()->start)
                     ->where('created_at', '<=', request()->end)
-                    ->orderBy('app_date', 'desc')
-                    ->where('user_id', request()->user_id)
                     ->orderBy('app_date', 'desc');
             }
 
