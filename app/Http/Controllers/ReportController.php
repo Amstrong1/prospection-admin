@@ -11,7 +11,7 @@ class ReportController extends Controller
     {
         $structure = Auth::user()->structure;
         return view('app.reports.index', [
-            'reports' => $structure->reports()->get(),
+            'reports' => $structure->reports()->orderBy('id', 'desc')->get(),
             'my_actions' => $this->report_actions(),
             'my_attributes' => $this->report_columns(),
         ]);

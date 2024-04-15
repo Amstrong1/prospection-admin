@@ -13,14 +13,24 @@ class SuspectController extends Controller
     {
         $structure = Auth::user()->structure;
         if (request()->method() == 'POST') {
-            if (request()->user_id == 'all') {
-                $suspects = $structure->suspects()->get();
-            } else {
-                $suspects = $structure->suspects()->where('user_id', request()->user_id)->get();
+            $suspects = $structure->suspects()->orderBy('app_date', 'desc');
+
+            if (request()->filled('user_id')) {
+                $suspects = $suspects->where('user_id', request()->user_id)
+                    ->orderBy('app_date', 'desc');
             }
-            
+
+            if (request()->filled('start') && request()->filled('end') && request()->end > request()->start) {
+                $suspects = $suspects->where('created_at', '>=', request()->start)
+                    ->where('created_at', '<=', request()->end)
+                    ->orderBy('app_date', 'desc')
+                    ->where('user_id', request()->user_id)
+                    ->orderBy('app_date', 'desc');
+            }
+
+            $suspects = $suspects->get();
         } else {
-            $suspects = $structure->suspects()->get();
+            $suspects = $structure->suspects()->orderBy('app_date', 'desc')->get();
         }
 
         return view('app.suspects.index', [
@@ -43,8 +53,8 @@ class SuspectController extends Controller
     {
         $columns = (object) [
             'recruiter_name' => 'Agents',
-            'name' => 'Nom et prénom',
-            // 'company' => 'Entreprise',
+            // 'name' => 'Nom et prénom',
+            'company' => 'Entreprise',
             // 'address' => 'Adresse',
             // 'tel' => 'Tel',
             // 'email' => 'Email',

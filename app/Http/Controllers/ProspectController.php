@@ -17,19 +17,29 @@ class ProspectController extends Controller
     {
         $structure = Auth::user()->structure;
         if (request()->method() == 'POST') {
-            if (request()->user_id == 'all' && request()->suspect_response == 'all') {
-                $prospects = $structure->prospects()->get();
-            } elseif (request()->user_id == 'all' && request()->suspect_response != 'all') {
-                $prospects = $structure->prospects()->where('status', request()->suspect_response)->get();
-            } elseif (request()->user_id != 'all' && request()->suspect_response == 'all') {
-                $prospects = $structure->prospects()->where('user_id', request()->user_id)->get();
-            } else {
-                $prospects = $structure->prospects()->where('user_id', request()->user_id)
-                    ->where('status', request()->suspect_response)
-                    ->get();
+            $prospects = $structure->prospects()->orderBy('app_date', 'desc');
+
+            if (request()->filled('suspect_response')) {
+                $prospects = $prospects->where('status', request()->suspect_response)
+                    ->orderBy('app_date', 'desc');
             }
+
+            if (request()->filled('user_id')) {
+                $prospects = $prospects->where('user_id', request()->user_id)
+                    ->orderBy('app_date', 'desc');
+            }
+
+            if (request()->filled('start') && request()->filled('end') && request()->end > request()->start) {
+                $prospects = $prospects->where('created_at', '>=', request()->start)
+                    ->where('created_at', '<=', request()->end)
+                    ->orderBy('app_date', 'desc')
+                    ->where('user_id', request()->user_id)
+                    ->orderBy('app_date', 'desc');
+            }
+
+            $prospects = $prospects->get();
         } else {
-            $prospects = $structure->prospects()->get();
+            $prospects = $structure->prospects()->orderBy('app_date', 'desc')->get();
         }
 
         return view('app.prospects.index', [
@@ -52,7 +62,8 @@ class ProspectController extends Controller
     {
         $columns = (object) [
             'recruiter_name' => 'Agents',
-            'name' => 'Nom et prénom',
+            // 'name' => 'Nom et prénom',
+            'company' => 'Entreprise',
             'solutions' => 'Solutions',
             'status' => 'Reponse',
             'formatted_created_at' => 'Date',
