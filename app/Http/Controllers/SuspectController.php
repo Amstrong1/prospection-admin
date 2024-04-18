@@ -32,7 +32,7 @@ class SuspectController extends Controller
         }
 
         return view('app.suspects.index', [
-            'users' => User::where('role', 'user')->get(),
+            'users' => $structure->users()->where('role', 'user')->get(),
             'suspects' => $suspects,
             'my_actions' => $this->suspect_actions(),
             'my_attributes' => $this->suspect_columns(),
