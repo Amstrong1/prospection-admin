@@ -1037,6 +1037,9 @@ select {
 .w-6 {
   width: 1.5rem;
 }
+.w-64 {
+  width: 16rem;
+}
 .w-8 {
   width: 2rem;
 }
@@ -1534,9 +1537,6 @@ select {
 }
 .pb-6 {
   padding-bottom: 1.5rem;
-}
-.pb-\[6px\] {
-  padding-bottom: 6px;
 }
 .pe-4 {
   padding-inline-end: 1rem;

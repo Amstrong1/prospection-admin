@@ -10,17 +10,17 @@
 
                         <form action="" method="post">
                             @csrf
-                            <div class="flex sm:flex-col items-end md:flex-row gap-2">
+                            <div class="flex sm:flex-col items-end md:flex-row gap-2 text-xs">
 
                                 <div class="relative flex flex-wrap">
                                     <span
-                                        class="flex items-center whitespace-nowrap py-[0.25rem] text-center text-base">Filtrer
+                                        class="flex items-center whitespace-nowrap py-[0.25rem] text-center">Filtrer
                                         par date :</span> &nbsp;
                                     <input type="date" aria-label="Début" value="{{ request()->start }}"
                                         name="start"
-                                        class="rounded-l relative m-0 block flex-auto border-gray-300 border-r-0 py-2" />
+                                        class="rounded-l relative m-0 block flex-auto border-gray-300 border-r-0 py-2 text-xs" />
                                     <input type="date" aria-label="Fin" value="{{ request()->end }}" name="end"
-                                        class="relative m-0 -ms-px block flex-auto border-gray-300 border-x-0 py-2" />
+                                        class="relative m-0 -ms-px block flex-auto border-gray-300 border-x-0 py-2 text-xs" />
                                     <button type="submit"
                                         class="z-[2] inline-block border rounded-r border-gray-300 px-2 text-xs"
                                         data-twe-ripple-init type="button" id="button-addon2">
@@ -32,7 +32,7 @@
                                     </button>
                                 </div>
 
-                                <select class="border-gray-300 rounded" name="user_id" onchange="this.form.submit()">
+                                <select class="text-xs w-32 border-gray-300 rounded" name="user_id" onchange="this.form.submit()">
                                     <option value="">Tous les agents</option>
                                     @foreach ($users as $user)
                                         <option value="{{ $user->id }}" @selected($user->id == request()->user_id)>
@@ -41,7 +41,7 @@
                                     @endforeach
                                 </select>
 
-                                <select class="border-gray-300 rounded" name="suspect_response" onchange="this.form.submit()">
+                                <select class="text-xs w-32 border-gray-300 rounded" name="suspect_response" onchange="this.form.submit()">
                                     <option value="">Toutes les réponses</option>
                                     <option value="Oui" @selected('Oui' == request()->suspect_response)>Oui</option>
                                     <option value="Non" @selected('Non' == request()->suspect_response)>Non</option>
