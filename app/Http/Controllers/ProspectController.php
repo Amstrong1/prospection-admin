@@ -121,6 +121,13 @@ class ProspectController extends Controller
                 'options' => $solutions,
             ],
         ];
+
+        if (request()->routeIs('prospects.show')) {
+            $fields['report'] = [
+                'title' => 'Rapport',
+                'field' => 'textarea',
+            ];
+        }
         return $fields;
     }
 }

@@ -9,7 +9,7 @@ class Prospect extends Model
 {
     use HasFactory;
 
-    protected $append = ['name', 'recruiter_name', 'solutions', 'formatted_created_at', 'reports']; 
+    protected $append = ['name', 'recruiter_name', 'solutions', 'formatted_created_at', 'report']; 
 
     public function user()
     {
@@ -23,7 +23,7 @@ class Prospect extends Model
 
     public function reports()
     {
-        return $this->hasMany(Report::class, 'prospect_id');
+        return $this->hasMany(Report::class, 'prospect_id')->orderBy('id', 'desc');
     } 
 
     public function getNameAttribute()
@@ -51,8 +51,8 @@ class Prospect extends Model
         return $this->created_at->format('d/m/Y - H:i');
     }
 
-    public function getReportsAttribute()
+    public function getReportAttribute()
     {
-        return $this->reports()->first();
-    }
+        return $this->reports()->first()->report ?? "Aucun rapport";
+    }   
 }

@@ -12,7 +12,7 @@
             <x-input-label style="color: #000" for="{{ $attr }}" value="{!! $value['title'] !!}"></x-input-label>
 
             @if ($value['field'] === 'richtext' || $value['field'] === 'textarea')
-                <textarea style="color: #000" class="block mt-1 w-full border-2 py-2 px-4 rounded-lg outline-0" id="reader">{!! old($attr) ?? $fill !!}</textarea>
+                <textarea readonly style="color: #000" class="block mt-1 w-full border-2 py-2 px-4 rounded-lg outline-0" id="reader">{!! old($attr) ?? $fill !!}</textarea>
             @elseif ($value['field'] === 'file')
                 <div class="w-1/2 mx-auto p-1 md:p-2">
                     <img alt="gallery" class="block h-full w-full rounded-lg object-cover object-center"

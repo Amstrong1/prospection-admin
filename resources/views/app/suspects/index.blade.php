@@ -15,14 +15,14 @@
 
                                     <div class="relative flex flex-wrap">
                                         <span
-                                            class="flex items-center whitespace-nowrap rounded-spx-3 py-[0.25rem] text-center text-base">Filtrer
+                                            class="flex items-center whitespace-nowrap py-[0.25rem] text-center text-base">Filtrer
                                             par date :</span> &nbsp;
                                         <input type="date" aria-label="Début"
-                                            class="rounded-l relative m-0 block flex-auto border-gray-300 border-r-0 py-[0.25rem]" />
+                                            class="rounded-l relative m-0 block flex-auto border-gray-300 border-r-0 py-2" />
                                         <input type="date" aria-label="Fin"
-                                            class="relative m-0 -ms-px block flex-auto border-gray-300 border-x-0 py-[0.25rem]" />
+                                            class="relative m-0 -ms-px block flex-auto border-gray-300 border-x-0 py-2" />
                                         <button type="submit"
-                                            class="z-[2] inline-block border border-gray-300 pb-[6px] px-2 text-xs"
+                                            class="z-[2] inline-block border border-gray-300 rounded-r px-2 text-xs"
                                             data-twe-ripple-init type="button" id="button-addon2">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -32,7 +32,7 @@
                                         </button>
                                     </div>
 
-                                    <select class="border-gray-300" name="user_id" id="" onchange="this.form.submit()">
+                                    <select class="border-gray-300 rounded" name="user_id" id="" onchange="this.form.submit()">
                                         <option value="">Tous les agents</option>
                                         @foreach ($users as $user)
                                             <option value="{{ $user->id }}" @selected($user->id == request()->user_id)>
