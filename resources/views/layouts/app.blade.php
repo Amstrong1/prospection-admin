@@ -17,6 +17,11 @@
     <script src="{{ mix('js/app.js') }}" defer></script>
 
     <style>
+        #map {
+            width: '100%';
+            height: 400px;
+        }
+
         .buttons-excel {
             padding-bottom: 0.625rem;
             padding-top: 0.625rem;
@@ -40,6 +45,8 @@
             border-color: #E5E7EB;
         }
     </style>
+    <link rel='stylesheet' href='https://unpkg.com/leaflet@1.8.0/dist/leaflet.css' crossorigin='' />
+
     @laravelPWA
 </head>
 

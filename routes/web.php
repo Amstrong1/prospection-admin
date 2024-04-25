@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('structures', StructureController::class);
 
     Route::get('/logs', [LogController::class, 'index'])->name('logs.index');
+    Route::get('/logs/{user}/map', [LogController::class, 'map'])->name('logs.map');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

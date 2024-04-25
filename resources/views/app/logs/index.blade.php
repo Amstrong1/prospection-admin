@@ -7,38 +7,10 @@
                         <h1 class="font-bold text-lg my-2">
                             {{ __('Logs') }}
                         </h1>
-
-                        {{-- <div class="flex gap-2">
-                            <form action="" method="post">
-                                @csrf
-                                <input type="hidden" name="suspect_response" value="{{ request()->suspect_response ?? "all" }}">
-                                <select class="rounded border-gray-300" name="user_id" id=""
-                                    onchange="this.form.submit()">
-                                    <option value="all">Tous les agents</option>
-                                    @foreach ($users as $user)
-                                        <option value="{{ $user->id }}" @selected($user->id == request()->user_id)>
-                                            {{ $user->lastname . ' ' . $user->firstname }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </form>
-
-                            <form action="" method="post">
-                                @csrf
-                                <input type="hidden" name="user_id" value="{{ request()->user_id ?? "all" }}">
-                                <select class="rounded border-gray-300" name="suspect_response" id=""
-                                    onchange="this.form.submit()">
-                                    <option value="all">Toutes les réponses</option>
-                                    <option value="Oui" @selected("Oui" == request()->user_id)>Oui</option>
-                                    <option value="Non" @selected("Non" == request()->user_id)>Non</option>
-                                    <option value="Indécis" @selected("Indécis" == request()->user_id)>Indécis</option>
-                                </select>
-                            </form>
-                        </div> --}}
                     </div>
 
                     <div class="mt-4">
-                        <x-tables.default :resources="$logs" :mattributes="$my_attributes" type="log" />
+                        <x-tables.default :resources="$logs" :mattributes="$my_attributes" :mactions="$my_actions" type="log" />
                     </div>
                 </div>
             </div>
